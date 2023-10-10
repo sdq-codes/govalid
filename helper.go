@@ -37,14 +37,20 @@ func isBoolean(str string) bool {
 	return false
 }
 
-//isCreditCard check the provided card number is a valid
-//  Visa, MasterCard, American Express, Diners Club, Discover or JCB card
+// isCreditCard check the provided card number is a valid
+//
+//	Visa, MasterCard, American Express, Diners Club, Discover or JCB card
 func isCreditCard(card string) bool {
 	return regexCreditCard.MatchString(card)
 }
 
 // isCoordinate is a valid Coordinate or not
 func isCoordinate(str string) bool {
+	return regexCoordinate.MatchString(str)
+}
+
+// isCoordinate is a valid Coordinate or not
+func isConfirmed(str string) bool {
 	return regexCoordinate.MatchString(str)
 }
 
