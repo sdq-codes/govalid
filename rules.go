@@ -417,6 +417,7 @@ func init() {
 		str := toString(value)
 		err := fmt.Errorf("The %s and %s confirmation does not match", field, field)
 		confirmValue := allFields.Opts.Request.FormValue(field + "confirmation")
+		fmt.Println("confirmValue" + confirmValue)
 		if message != "" {
 			return errors.New(message)
 		}
