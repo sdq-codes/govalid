@@ -98,14 +98,14 @@ func (v *Validator) Validate() url.Values {
 				file, fh, _ := v.Opts.Request.FormFile(fld)
 				if file != nil && fh.Filename != "" {
 					validateFiles(v.Opts.Request, fld, rule, msg, errsBag)
-					validateCustomRules(fld, rule, msg, file, errsBag)
+					validateCustomRules(fld, rule, msg, file, errsBag, nil)
 				} else {
-					validateCustomRules(fld, rule, msg, nil, errsBag)
+					validateCustomRules(fld, rule, msg, nil, errsBag, nil)
 				}
 			} else {
 				// validate if custom rules exist
 				reqVal := strings.TrimSpace(v.Opts.Request.Form.Get(field))
-				validateCustomRules(field, rule, msg, reqVal, errsBag)
+				validateCustomRules(field, rule, msg, reqVal, errsBag, v)
 			}
 		}
 	}
@@ -200,7 +200,7 @@ func (v *Validator) internalValidateStruct() url.Values {
 				panic(fmt.Errorf("govalidator: %s is not a valid rule", rule))
 			}
 			msg := v.getCustomMessage(field, rule)
-			validateCustomRules(field, rule, msg, value, errsBag)
+			validateCustomRules(field, rule, msg, value, errsBag, v)
 		}
 	}
 
